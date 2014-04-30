@@ -2,6 +2,7 @@ CalcJs
 ==========
 
 Auxiliary arithmetic library. 
+
 More accurately, and more quickly.
 
 ```
