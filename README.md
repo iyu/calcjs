@@ -35,7 +35,7 @@ In browsers:
 
 Using `npm`:
 ```
-npm install git://github.com/yuhei-a/calcjs.git@0.0.1
+npm install calcjs
 ```
 
 ## Usage
