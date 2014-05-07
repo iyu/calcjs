@@ -99,8 +99,8 @@
   
   CalcJs.prototype.add = function() {
     var _digit = Math.pow(10, digit(arguments));
-    var result = 0;
-    for (var i = 0; i < arguments.length; i++) {
+    var result = arguments[0] * _digit || 0;
+    for (var i = 1; i < arguments.length; i++) {
       result += arguments[i] * _digit;
     }
     return result / _digit;
@@ -108,8 +108,8 @@
   
   CalcJs.prototype.sub = function() {
     var _digit = Math.pow(10, digit(arguments));
-    var result = 0;
-    for (var i = 0; i < arguments.length; i++) {
+    var result = arguments[0] * _digit || 0;
+    for (var i = 1; i < arguments.length; i++) {
       result -= arguments[i] * _digit;
     }
     return result / _digit;
@@ -117,15 +117,15 @@
   
   CalcJs.prototype.multi = function() {
     var _digit = Math.pow(10, digit(arguments));
-    var result = 1;
-    for (var i = 0; i < arguments.length; i++) {
+    var result = arguments[0] * _digit || 0;
+    for (var i = 1; i < arguments.length; i++) {
       result *= arguments[i] * _digit;
     }
     return result / Math.pow(_digit, arguments.length);
   };
   
   CalcJs.prototype.div = function() {
-    var result = arguments[0];
+    var result = arguments[0] || 0;
     for (var i = 1; i < arguments.length; i++) {
       result /= arguments[i];
     }
