@@ -3,16 +3,26 @@
   "version": "0.0.2",
   "description": "calcjs",
   "main": "calcjs.js",
+  "scripts": {
+    "test": "mocha -r should -R spec --recursive test",
+    "jshint": "jshint calcjs.js"
+  },
   "repository": {
     "type": "git",
     "url": "git://github.com/yuhei-a/calcjs.git"
   },
   "keywords": [
-    "calcjs"
+    "calcjs",
+    "calc",
+    "math"
   ],
   "author": "Yuhei Aihara",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/yuhei-a/calcjs/issues"
+  },
+  "devDependencies": {
+    "should": "~3.3.1",
+    "mocha": "~1.18.2"
   }
 }

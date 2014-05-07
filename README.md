@@ -76,3 +76,6 @@ calcjs.div(10, 5, 2)
 calcjs.begin(0.1).add(0.2).multi(0.1).end()
 // return 0.12
 ```
+
+## Test
+Run `npm test` and `npm run-script jshint`
