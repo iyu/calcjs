@@ -99,5 +99,5 @@
         "afterEach",            // Used by mocha
         "setImmediate"          // Used by v0.10
     ],
-    "indent"        : 4         // Specify indentation spacing
+    "indent"        : 2         // Specify indentation spacing
 }

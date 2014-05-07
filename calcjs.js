@@ -26,36 +26,36 @@
     return result;
   }
   
-  function _CalcJs(num) {
+  function Chain(num) {
     this.nums = [num];
     this.operators = [];
   }
   
-  _CalcJs.prototype.add = function(num) {
+  Chain.prototype.add = function(num) {
     this.operators.push('add');
     this.nums.push(num);
     return this;
   };
   
-  _CalcJs.prototype.sub = function(num) {
+  Chain.prototype.sub = function(num) {
     this.operators.push('sub');
     this.nums.push(num);
     return this;
   };
   
-  _CalcJs.prototype.multi = function(num) {
+  Chain.prototype.multi = function(num) {
     this.operators.push('multi');
     this.nums.push(num);
     return this;
   };
   
-  _CalcJs.prototype.div = function(num) {
+  Chain.prototype.div = function(num) {
     this.operators.push('div');
     this.nums.push(num);
     return this;
   };
   
-  _CalcJs.prototype.end = function() {
+  Chain.prototype.end = function() {
     var _digit = Math.pow(10, digit(this.nums));
   
     var indexMulti = this.operators.indexOf('multi');
@@ -133,7 +133,7 @@
   };
   
   CalcJs.prototype.begin = function(num) {
-    return new _CalcJs(num);
+    return new Chain(num);
   };
   
   CalcJs.prototype.noConflict = function() {
