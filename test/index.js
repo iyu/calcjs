@@ -21,6 +21,10 @@ describe('#multi', function() {
     var result = calcjs.multi(0.1, 0.1, 0.1);
     result.should.equal(0.001);
   });
+  it('calcjs.multi(0.55, 100) > 55', function() {
+    var result = calcjs.multi(0.55, 100);
+    result.should.equal(55);
+  });
 });
 
 describe('#div', function() {
