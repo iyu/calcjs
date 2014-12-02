@@ -27,7 +27,7 @@
   }
 
   function toUpperDigit(num, digit) {
-    return num * digit | 0;
+    return Math.round(num * digit);
   }
   
   function Chain(num) {
