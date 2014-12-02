@@ -10,7 +10,7 @@
 
   var previousCalcJs = root.calcjs;
   
-  var version = '0.0.3';
+  var version = '0.0.5';
   
   function calcDigit(list) {
     var result = 0;
