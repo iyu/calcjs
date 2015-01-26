@@ -87,7 +87,7 @@ calcjs.begin(0.1).add(0.2).multi(0.1).end()
 ```
 
 ## Contribution
-1. Fork it ( https://github.com/iyu/xlsx-parser/fork )
+1. Fork it ( https://github.com/iyu/calcjs/fork )
 2. Create a feature branch
 3. Commit your changes
 4. Rebase your local changes against the master branch
