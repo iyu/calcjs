@@ -1,7 +1,7 @@
 /**
  * CalcJs
  * @name calcjs.js
- * @author Yuhei Aihara <aihara_yuhei2cyberagent.co.jp>
+ * @author Yuhei Aihara <aihara_yuhei@cyberagent.co.jp>
  * @license MIT License
  */
 (function() {
@@ -10,7 +10,7 @@
 
   var previousCalcJs = root.calcjs;
   
-  var version = '0.0.5';
+  var VERSION = '0.0.5';
   
   function calcDigit(list) {
     var result = 0;
@@ -100,7 +100,7 @@
   
   
   function CalcJs() {
-    this.version = version;
+    this.VERSION = VERSION;
   }
   
   CalcJs.prototype.add = function() {
@@ -148,14 +148,23 @@
   };
 
   var calcjs = new CalcJs();
-  if (typeof exports !== 'undefined') {
-    if (typeof module !== 'undefined' && module.exports) {
-      exports = module.exports = calcjs;
+
+  // export for AMD
+  if (typeof define === 'function' && typeof define.amd === 'object') {
+    define(function() {
+      return calcjs;
+    });
+  }
+  // export for nodejs
+  else if (typeof exports !== 'undefined' && typeof module !== 'undefined') {
+    if (module.exports === exports) {
+      module.exports = calcjs;
     } else {
       exports = calcjs;
     }
-  } else {
+  }
+  // export for browser
+  else {
     root.calcjs = calcjs;
   }
 }.call(this));
-

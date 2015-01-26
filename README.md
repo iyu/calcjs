@@ -28,27 +28,36 @@ More accurately, and more quickly.
 ```
 
 ## Installation
-In browsers:
+In browser:
 ```
 <script src="calcjs.js"></script>
+<script>
+  (function() {
+    var calcjs = window.calcjs;
+    // using calcjs
+  }());
+</script>
+```
+
+In an AMD loader:
+```
+require(['calcjs'], function(calcjs) {
+  // using calcjs
+});
 ```
 
 Using `npm`:
 ```
-npm install calcjs
-```
-
-## Usage
-In browsers:
-```
-var calcjs = windows.calcjs;
+npm install --save calcjs
 ```
 
 In Node.js:
 ```
 var calcjs = require('calcjs');
+// using calcjs
 ```
 
+## Usage
 ```
 // Addition
 // 0.1 + 0.1 + 0.1
@@ -77,5 +86,10 @@ calcjs.begin(0.1).add(0.2).multi(0.1).end()
 // return 0.12
 ```
 
-## Test
-Run `npm test` and `npm run-script jshint`
+## Contribution
+1. Fork it ( https://github.com/iyu/xlsx-parser/fork )
+2. Create a feature branch
+3. Commit your changes
+4. Rebase your local changes against the master branch
+5. Run test suite with the `npm test; npm run-script jshint` command and confirm that it passes
+5. Create new Pull Request
