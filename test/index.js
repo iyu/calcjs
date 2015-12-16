@@ -25,6 +25,14 @@ describe('#multi', function() {
     var result = calcjs.multi(0.55, 100);
     result.should.equal(55);
   });
+  it('calcjs.multi(0.00000000123, 100) > 1.23e-7', function() {
+    var result = calcjs.multi(0.00000000123, 100);
+    result.should.equal(0.000000123);
+  });
+  it('calcjs.multi(0.0000001, 10) > 0.000001', function() {
+    var result = calcjs.multi(0.0000001, 10);
+    result.should.equal(0.000001);
+  });
 });
 
 describe('#div', function() {

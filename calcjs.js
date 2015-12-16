@@ -15,9 +15,14 @@
   function calcDigit(list) {
     var result = 0;
     for (var i = 0; i < list.length; i++) {
-      var str = list[i].toString();
-      var index = str.indexOf('.');
-      var ret = ~index ? str.length - index - 1 : 0;
+      var str = list[i].toExponential();
+      var match = str.match(/^\d(?:\.(\d+))?e([\+\-])(\d+)$/);
+      var ret = match[1] && match[1].length || 0;
+      if (match[2] === '+') {
+        ret -= Number(match[3]);
+      } else {
+        ret += Number(match[3]);
+      }
       if (result < ret) {
         result = ret;
       }
