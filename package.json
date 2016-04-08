@@ -1,6 +1,6 @@
 {
   "name": "calcjs",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "calcjs",
   "main": "calcjs.js",
   "scripts": {

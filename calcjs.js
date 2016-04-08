@@ -9,9 +9,9 @@
   var root = this;
 
   var previousCalcJs = root.calcjs;
-  
-  var VERSION = '0.0.6';
-  
+
+  var VERSION = '0.0.8';
+
   function calcDigit(list) {
     var result = 0;
     for (var i = 0; i < list.length; i++) {
@@ -27,46 +27,46 @@
         result = ret;
       }
     }
-  
+
     return Math.pow(10, result);
   }
 
   function toUpperDigit(num, digit) {
     return Math.round(num * digit);
   }
-  
+
   function Chain(num) {
     this.nums = [num];
     this.operators = [];
   }
-  
+
   Chain.prototype.add = function(num) {
     this.operators.push('add');
     this.nums.push(num);
     return this;
   };
-  
+
   Chain.prototype.sub = function(num) {
     this.operators.push('sub');
     this.nums.push(num);
     return this;
   };
-  
+
   Chain.prototype.multi = function(num) {
     this.operators.push('multi');
     this.nums.push(num);
     return this;
   };
-  
+
   Chain.prototype.div = function(num) {
     this.operators.push('div');
     this.nums.push(num);
     return this;
   };
-  
+
   Chain.prototype.end = function() {
     var digit = calcDigit(this.nums);
-  
+
     var indexMulti = this.operators.indexOf('multi');
     var indexDiv = this.operators.indexOf('div');
     while(~indexMulti || ~indexDiv) {
@@ -82,12 +82,12 @@
         this.nums.splice(indexDiv, 2, ret);
         this.operators.splice(indexDiv, 1);
       }
-  
+
       indexMulti = this.operators.indexOf('multi');
       indexDiv = this.operators.indexOf('div');
       digit = calcDigit(this.nums);
     }
-  
+
     digit = calcDigit(this.nums);
     var result = this.nums[0];
     for (var i = 0; i < this.operators.length; i++) {
@@ -97,17 +97,16 @@
         result = (toUpperDigit(result, digit) - toUpperDigit(this.nums[i + 1], digit)) / digit;
       }
     }
-  
+
     this.nums = [];
     this.operators = [];
     return result;
   };
-  
-  
+
   function CalcJs() {
     this.VERSION = VERSION;
   }
-  
+
   CalcJs.prototype.add = function() {
     var digit = calcDigit(arguments);
     var result = toUpperDigit(arguments[0], digit) || 0;
@@ -116,7 +115,7 @@
     }
     return result / digit;
   };
-  
+
   CalcJs.prototype.sub = function() {
     var digit = calcDigit(arguments);
     var result = toUpperDigit(arguments[0], digit) || 0;
@@ -125,7 +124,7 @@
     }
     return result / digit;
   };
-  
+
   CalcJs.prototype.multi = function() {
     var digit = calcDigit(arguments);
     var result = toUpperDigit(arguments[0], digit) || 0;
@@ -134,7 +133,7 @@
     }
     return result / Math.pow(digit, arguments.length);
   };
-  
+
   CalcJs.prototype.div = function() {
     var result = arguments[0] || 0;
     for (var i = 1; i < arguments.length; i++) {
@@ -142,11 +141,11 @@
     }
     return result;
   };
-  
+
   CalcJs.prototype.begin = function(num) {
     return new Chain(num);
   };
-  
+
   CalcJs.prototype.noConflict = function() {
     root.calcjs = previousCalcJs;
     return this;
