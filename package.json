@@ -3,6 +3,12 @@
   "version": "1.0.0-0",
   "description": "calcjs",
   "main": "calcjs.js",
+  "files": [
+    "calcjs.js",
+    "calcjs.ts",
+    "package.json",
+    "README.md"
+  ],
   "scripts": {
     "build": "tsc --module umd",
     "test": "rm -f calcjs.js && ava --verbose",
