@@ -4,8 +4,9 @@
   "description": "calcjs",
   "main": "calcjs.js",
   "scripts": {
-    "test": "mocha -r should -R spec --recursive test",
-    "jshint": "jshint calcjs.js"
+    "build": "tsc --module umd",
+    "test": "rm -f calcjs.js && ava --verbose",
+    "lint": "tslint --project ."
   },
   "repository": {
     "type": "git",
@@ -22,8 +23,20 @@
     "url": "https://github.com/iyu/calcjs/issues"
   },
   "devDependencies": {
-    "jshint": "^2.5.10",
-    "mocha": "^2.0.1",
-    "should": "^4.3.0"
+    "@types/node": "^12.7.5",
+    "ava": "^2.3.0",
+    "ts-node": "^8.3.0",
+    "tslint": "^5.20.0",
+    "typescript": "^3.6.2"
+  },
+  "dependencies": {},
+  "ava": {
+    "compileEnhancements": false,
+    "extensions": [
+      "ts"
+    ],
+    "require": [
+      "ts-node/register"
+    ]
   }
 }
