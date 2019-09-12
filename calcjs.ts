@@ -5,7 +5,7 @@
  * @license MIT License
  */
 
-const VERSION = "0.0.8";
+const VERSION = "1.0.0";
 
 const calcDigit = (list: number[]) => {
   let result = 0;
