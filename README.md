@@ -91,5 +91,5 @@ calcjs.begin(0.1).add(0.2).multi(0.1).end()
 2. Create a feature branch
 3. Commit your changes
 4. Rebase your local changes against the master branch
-5. Run test suite with the `npm test; npm run-script jshint` command and confirm that it passes
+5. Run test suite with the `npm test; npm run lint` command and confirm that it passes
 5. Create new Pull Request
