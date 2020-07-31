@@ -5,15 +5,15 @@
  * @license MIT License
  */
 
-const VERSION = "1.0.0";
+const VERSION = '1.0.0';
 
 const calcDigit = (list: number[]) => {
   let result = 0;
-  for (const num of list) {
+  list.forEach((num) => {
     const str = num.toExponential();
-    const match = str.match(/^\d(?:\.(\d+))?e([\+\-])(\d+)$/);
-    let ret = match && match[1] && match[1].length || 0;
-    if (match && match[2] === "+") {
+    const match = str.match(/^\d(?:\.(\d+))?e([+-])(\d+)$/);
+    let ret = (match && match[1] && match[1].length) || 0;
+    if (match && match[2] === '+') {
       ret -= Number(match[3]);
     } else if (match) {
       ret += Number(match[3]);
@@ -21,43 +21,42 @@ const calcDigit = (list: number[]) => {
     if (result < ret) {
       result = ret;
     }
-  }
+  });
 
-  return Math.pow(10, result);
+  return 10 ** result;
 };
 
-const toUpperDigit = (num: number, digit: number) => {
-  return Math.round(num * digit);
-};
+const toUpperDigit = (num: number, digit: number) => Math.round(num * digit);
 
 class Chain {
   private nums: number[];
-  private operators: Array<"add" | "sub" | "multi" | "div"> = [];
+
+  private operators: Array<'add' | 'sub' | 'multi' | 'div'> = [];
 
   constructor(num: number) {
     this.nums = [num];
   }
 
   public add(num: number) {
-    this.operators.push("add");
+    this.operators.push('add');
     this.nums.push(num);
     return this;
   }
 
   public sub(num: number) {
-    this.operators.push("sub");
+    this.operators.push('sub');
     this.nums.push(num);
     return this;
   }
 
   public multi(num: number) {
-    this.operators.push("multi");
+    this.operators.push('multi');
     this.nums.push(num);
     return this;
   }
 
   public div(num: number) {
-    this.operators.push("div");
+    this.operators.push('div');
     this.nums.push(num);
     return this;
   }
@@ -65,16 +64,16 @@ class Chain {
   public end() {
     let digit = calcDigit(this.nums);
 
-    let indexMulti = this.operators.indexOf("multi");
-    let indexDiv = this.operators.indexOf("div");
+    let indexMulti = this.operators.indexOf('multi');
+    let indexDiv = this.operators.indexOf('div');
     while (indexMulti >= 0 || indexDiv >= 0) {
       let nextIndex;
       let ret;
       if (indexMulti >= 0 && (indexDiv < 0 || indexMulti < indexDiv)) {
         nextIndex = indexMulti + 1;
-        ret = toUpperDigit(this.nums[indexMulti], digit) *
-          toUpperDigit(this.nums[nextIndex], digit) /
-          (digit * digit);
+        ret = (
+          toUpperDigit(this.nums[indexMulti], digit) * toUpperDigit(this.nums[nextIndex], digit)
+        ) / (digit * digit);
         this.nums.splice(indexMulti, 2, ret);
         this.operators.splice(indexMulti, 1);
       } else if (indexDiv >= 0) {
@@ -84,20 +83,20 @@ class Chain {
         this.operators.splice(indexDiv, 1);
       }
 
-      indexMulti = this.operators.indexOf("multi");
-      indexDiv = this.operators.indexOf("div");
+      indexMulti = this.operators.indexOf('multi');
+      indexDiv = this.operators.indexOf('div');
       digit = calcDigit(this.nums);
     }
 
     digit = calcDigit(this.nums);
     let result = this.nums[0];
-    for (let i = 0; i < this.operators.length; i++) {
-      if (this.operators[i] === "add") {
+    this.operators.forEach((ope, i) => {
+      if (ope === 'add') {
         result = (toUpperDigit(result, digit) + toUpperDigit(this.nums[i + 1], digit)) / digit;
       } else {
         result = (toUpperDigit(result, digit) - toUpperDigit(this.nums[i + 1], digit)) / digit;
       }
-    }
+    });
 
     this.nums = [];
     this.operators = [];
@@ -106,9 +105,9 @@ class Chain {
 }
 
 class CalcJs {
-  public readonly VERSION = VERSION;
+  static readonly VERSION = VERSION;
 
-  public add(...args: number[]) {
+  static add(...args: number[]) {
     const digit = calcDigit(args);
     let result = toUpperDigit(args[0], digit) || 0;
     for (let i = 1; i < args.length; i++) {
@@ -117,7 +116,7 @@ class CalcJs {
     return result / digit;
   }
 
-  public sub(...args: number[]) {
+  static sub(...args: number[]) {
     const digit = calcDigit(args);
     let result = toUpperDigit(args[0], digit) || 0;
     for (let i = 1; i < args.length; i++) {
@@ -126,16 +125,16 @@ class CalcJs {
     return result / digit;
   }
 
-  public multi(...args: number[]) {
+  static multi(...args: number[]) {
     const digit = calcDigit(args);
     let result = toUpperDigit(args[0], digit) || 0;
     for (let i = 1; i < args.length; i++) {
       result *= toUpperDigit(args[i], digit);
     }
-    return result / Math.pow(digit, args.length);
+    return result / (digit ** args.length);
   }
 
-  public div(...args: number[]) {
+  static div(...args: number[]) {
     let result = args[0] || 0;
     for (let i = 1; i < args.length; i++) {
       result /= args[i];
@@ -143,9 +142,9 @@ class CalcJs {
     return result;
   }
 
-  public begin(num: number) {
+  static begin(num: number) {
     return new Chain(num);
   }
 }
 
-export = new CalcJs();
+export = CalcJs;
